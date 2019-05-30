@@ -1,0 +1,3 @@
+TestEntity.TestCaseId,TestEntity.TestMethod,CSDATA.loginUserName,CSDATA.password,CSDATA.categoryname,CSDATA.cardnumber,CSDATA.name,CSDATA.expmonth,CSDATA.expyear,CSDATA.securitycode,CSDATA.Feed,CSDATA.firstName,CSDATA.lastName,CSDATA.email
+TC_uploadimage_01,TC_uploadimage_test,livcsauto@gmail.com,qwert@12345,,,,,,,,,,
+TC_menu_test,TC_menu_test,airdrop_muvi@yopmail.com,muvi1234#,,4.11E+15,testcard,JUL,2036,123,https://bitdash-a.akamaihd.net/content/MI201109210084_1/m3u8s/f08e80da-bf1d-4e3d-8899-f0f6155f6efa.m3u8,,,
