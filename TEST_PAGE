@@ -1,0 +1,48 @@
+package com.seleniumtests.tests;
+import java.lang.reflect.Method;
+import java.util.Iterator;
+import java.util.LinkedHashMap;
+import org.testng.annotations.DataProvider;
+import org.testng.annotations.Test;
+import com.seleniumtests.core.Filter;
+import com.seleniumtests.core.SeleniumTestPlan;
+
+import com.seleniumtests.dataobject.CSDATA;
+
+import com.seleniumtests.util.SpreadSheetHelper;
+import com.seleniumtests.util.internal.entity.TestEntity;
+import com.seleniumtests.webpage.*;
+
+public class CSTEST extends SeleniumTestPlan {
+	
+	@DataProvider(
+			name = "CSDATA",
+	        parallel = false
+	    )
+	 public static Iterator<Object[]> getUserInfo(final Method m)
+		        throws Exception {
+		        Filter filter = Filter.equalsIgnoreCase(TestEntity.TEST_METHOD,
+		                m.getName());
+
+		        LinkedHashMap<String, Class<?>> classMap =
+		            new LinkedHashMap<String, Class<?>>();
+		        classMap.put("TestEntity", TestEntity.class);
+		        classMap.put("CSDATA",  CSDATA.class);
+
+		        return SpreadSheetHelper.getEntitiesFromSpreadsheet(
+		        		 CSTEST.class, classMap, "arya.csv", filter);
+		    }
+ 
+ @Test(
+		 priority=1,
+	        groups = { "sanity", "regression" },
+	        dataProvider = "CSDATA",
+	        description = "Verify the All content subscription plan in CMS"
+	    )
+	public void TC_menu_test(final TestEntity testEntity,final  CSDATA  CSDATA) throws Exception 
+	{
+	  new CSPage(true).TC_menu_01(CSDATA);
+	}
+ 
+
+}
