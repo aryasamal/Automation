@@ -47,7 +47,37 @@ public CSPage Add_location()throws Exception {
 	return this;
 	
 }
+public CSPage Textbox(TextFieldElement element,final String Text) throws Exception {
+		waitForSeconds(2);
+		element.clearAndType(Text);
+	    return this;
+	}
+public CSPage Click(ButtonElement element) throws Exception {
+		   
+		   element.waitForPresent(10);
+		   element.click();
+	        return this;
+	    }
+public CSPage Wait(int value) throws Exception {
+		 waitForSeconds(value);
+		 	
+			return this;
+		     
+	 }
+public CSPage Click(ButtonElement element) throws Exception {
+		   
+		   element.waitForPresent(10);
+		   element.click();
+	        return this;
+	    }
+	
 
+public CSPage SelectByText(final String Text, String xpath) throws Exception {
+
+SelectList s = new SelectList(Text, By.xpath(xpath));
+s.selectByText(Text);
+return this;
+}
 
 //Signup method
 
