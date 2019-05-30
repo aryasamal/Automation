@@ -14,7 +14,19 @@
     private static final ButtonElement browser=new ButtonElement("enter the browser button",locateByXPath(" //span[@class='filepond--label-action']"));
     private static final ButtonElement save_changes=new ButtonElement("click on the button",locateByXPath(" //button[@class='ui green button'] "));
     private static final ButtonElement logout=new ButtonElement("click on the logout button",locateByXPath("//a[contains(text(),'Log out')]"));
+    private static final ButtonElement Addlocation=new ButtonElement("click on the add locations",locateByXPath("//a[contains(text(),'Add locations')]"));
+    private static final ButtonElement add_office_location=new ButtonElement("click on the officelocation button",locateByXPath("//div[@class='ui green button']"));
+    private static final TextFieldElement location_name=new TextFieldElement("enter the location name",locateByXPath("//input[@placeholder='e.g. Head Office']"));
+    private static final ButtonElement city_name=new ButtonElement("select the city",locateByXPath("//div[@class='ui fluid search selection dropdown city_dropdown']//i[@class='dropdown icon']"));
+    private static final TextFieldElement state=new TextFieldElement("enter the state name",locateByXPath("/input[@name='state']"));
+    private static final TextFieldElement zipcode=new TextFieldElement("enter the state name",locateByXPath("//input[@name='zipcode']"));
+
+    private static final ButtonElement add_button=new ButtonElement("click the add button",locateByXPath("//div[@class='actions']//div[@class='ui green button'][contains(text(),'Add')]"));
+    private static final ButtonElement login_button=new ButtonElement("click on the loginbutton",locateByXPath("//button[contains(text(),'Login')]"));
+    private static final TextFieldElement emailid=new TextFieldElement("enter the userid",locateByXPath("//input[@id='id_email']"));
     
+  
+  
 
 public CSPage randomData(final  CSDATA  CSDATA) throws Exception {
     
@@ -27,27 +39,78 @@ public CSPage randomData(final  CSDATA  CSDATA) throws Exception {
 	
 	return this;
   }
+  
+public CSPage Add_location()throws Exception {
+	
+	Textbox(location_name,"bbsr").SelectByText("Albania","city_name").Textbox(state,"odisha").Textbox(zipcode,"751002")
+	.Click(add_button);
+	return this;
+	
+}
+
+
+//Signup method
+
 public CSPage TC_menu_01(final CSDATA CSDATA) throws Exception 
 
 {
-	randomData(CSDATA)
+      randomData(CSDATA)
     .Click(Try_for_free)
     .Wait(2)
-     .Textbox(firstname,CSDATA.getfirstName())
-     .Textbox(lastname,CSDATA.getlastName())
-     .Textbox(workemail,CSDATA.getEmail())
-     .Textbox(password,"test123")
-     .Textbox(companyname,"muvi")
-     .SelectByText("Agency","//select[@id='id_team_type']")
-     .Wait(10)
-     .Click(loginbutton)
-     .Wait(5)
-     .Click(complete_profile)
-     .Company_Profile()
-	 .Wait(5)
-	 .Click(save_changes)
-	 .Click(logout); 
+	.Textbox(firstname,CSDATA.getfirstName())
+	.Textbox(lastname,CSDATA.getlastName())
+	.Textbox(workemail,CSDATA.getEmail())
+	.Textbox(password,"test123")
+	.Textbox(companyname,"muvi")
+	.SelectByText("Agency","//select[@id='id_team_type']")
+	.Wait(10)
+	.Click(loginbutton)
+	.Wait(5);
        
 	return  new CSPage(false);
-
+	
+	
 }
+
+
+//Login with complete_profile method
+
+public CSPage TC_menu_02(final CSDATA CSDATA) throws Exception 
+{
+	
+ Click(login_button)
+ .Textbox(emailid,"fghf@yopmail.com")
+ .Wait(2)
+ .Textbox(password,"12345678")
+ .Wait(2)
+.Click(complete_profile)
+.Wait(2)
+.Company_Profile()
+.Wait(5)
+.Click(save_changes)
+.Wait(5);
+ 
+ return  new CSPage(false);
+}
+
+
+//Login with Add_location
+
+public CSPage TC_menu_03(final CSDATA CSDATA) throws Exception 
+{
+
+Click(login_button)
+.Textbox(emailid,"fghf@yopmail.com")
+.Wait(2)
+.Textbox(password,"12345678")
+.Wait(2)
+.Click(Addlocation)
+.Click(add_office_location) 
+.Add_location()
+.Click(logout); 
+    
+return  new CSPage(false);
+    
+}
+	
+	
