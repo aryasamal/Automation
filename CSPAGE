@@ -1,0 +1,53 @@
+    private static final ButtonElement Try_for_free=new ButtonElement("click the signup button",locateByXPath("//button[contains(text(),'Try for free')]"));
+    private static final TextFieldElement firstname=new TextFieldElement("enter the first name",locateByXPath("//input[@id='id_first_name']"));
+    private static final TextFieldElement lastname=new TextFieldElement("enter the last name",locateByXPath("//input[@id='id_last_name']"));
+    private static final TextFieldElement workemail=new TextFieldElement("enter the email id",locateByXPath("//input[@id='id_email']"));
+    private static final TextFieldElement password=new TextFieldElement("enter the password",locateByXPath("//input[@id='id_password']"));
+    private static final TextFieldElement companyname=new TextFieldElement("enter the company name",locateByXPath("//input[@id='id_company_name']"));
+    private static final ButtonElement loginbutton=new ButtonElement("click on the loginbutton",locateByXPath("//button[@class='ui primary large fluid button']"));
+    private static final ButtonElement complete_profile= new ButtonElement("click on the complete profile button",locateByXPath("//a[contains(text(),'Complete Profile')]"));
+    private static final TextFieldElement Company_Website_URL=new TextFieldElement("enter the webiste url name",locateByXPath(" //div[@class='eleven wide column']//div[2]//input[1]"));
+    private static final TextFieldElement About_the_Company=new TextFieldElement("enter the description",locateByXPath("//div[@class='field']//textarea"));
+    private static final TextFieldElement facebook_url=new TextFieldElement("enter the facebook login",locateByXPath("//div[contains(text(),'facebook.com/')]/..//input[1]"));
+    private static final TextFieldElement twitter_url=new TextFieldElement("enter the twitter login",locateByXPath("//div[contains(text(),'twitter.com/')]/..//input[1]"));
+    private static final TextFieldElement linkedin_url=new TextFieldElement("enter thelinkedin_url",locateByXPath("//div[contains(text(),'linkedin.com/')]/..//input[1]"));
+    private static final ButtonElement browser=new ButtonElement("enter the browser button",locateByXPath(" //span[@class='filepond--label-action']"));
+    private static final ButtonElement save_changes=new ButtonElement("click on the button",locateByXPath(" //button[@class='ui green button'] "));
+    private static final ButtonElement logout=new ButtonElement("click on the logout button",locateByXPath("//a[contains(text(),'Log out')]"));
+    
+
+public CSPage randomData(final  CSDATA  CSDATA) throws Exception {
+    
+    CSDATA.setfirstName(RandomName.name());
+	CSDATA.setlastName(RandomName.name());
+    CSDATA.setEmail(RandomEmailID.randomEmail());
+    CSDATA.setPassword(RandomPassword.password(10));
+    CSDATA.setZip(RandomZip.zip());
+   
+	
+	return this;
+  }
+public CSPage TC_menu_01(final CSDATA CSDATA) throws Exception 
+
+{
+	randomData(CSDATA)
+    .Click(Try_for_free)
+    .Wait(2)
+     .Textbox(firstname,CSDATA.getfirstName())
+     .Textbox(lastname,CSDATA.getlastName())
+     .Textbox(workemail,CSDATA.getEmail())
+     .Textbox(password,"test123")
+     .Textbox(companyname,"muvi")
+     .SelectByText("Agency","//select[@id='id_team_type']")
+     .Wait(10)
+     .Click(loginbutton)
+     .Wait(5)
+     .Click(complete_profile)
+     .Company_Profile()
+	 .Wait(5)
+	 .Click(save_changes)
+	 .Click(logout); 
+       
+	return  new CSPage(false);
+
+}
