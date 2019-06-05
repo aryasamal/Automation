@@ -44,5 +44,18 @@ public class CSTEST extends SeleniumTestPlan {
 	  new CSPage(true).TC_menu_01(CSDATA);
 	}
  
+@Test(
+		 priority=1,
+	        groups = { "sanity", "regression" },
+	        dataProvider = "CSDATA",
+	        description = "Verify the All content subscription plan in CMS"
+	    )
+	public void TC_menu_test1(final TestEntity testEntity,final  CSDATA  CSDATA) throws Exception 
+	{
+	  new CSPage(true).TC_menu_02(CSDATA);
+	}
+
+
+}
 
 }
