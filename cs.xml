@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<suite name="Selenium Framework Test Suite" parallel="methods"
+	verbose="1" thread-count="1">
+	<listeners>
+		<listener
+			class-name="com.seleniumtests.reporter.SeleniumTestsReporter" />
+		<listener
+			class-name="com.seleniumtests.core.TestRetryListener" />
+	</listeners>
+
+<parameter name="appURL" value="https://param-staging.com/" />
+
+	
+
+	<parameter name="browser" value="chrome" />  <!--"*firefox, *chrome, *iexplore, *android" -->
+	<parameter name="runMode" value="LOCAL" /> <!--LOCAL or ExistingGrid -->
+
+
+	<parameter name="webDriverGrid"
+		value="http://localhost:4444/wd/hub" />
+	<parameter name="webSessionTimeOut" value="120000" />
+	<parameter name="maxConcurrentWebSessions" value="5" />
+	<parameter name="softAssertEnabled" value="true" />
+	
+	<parameter name="useFirefoxDefaultProfile" value="false" />
+	<groups>
+		<run>
+			<include name="regression" /><!-- "sanity", "regression" -->
+		</run>
+	</groups>
+
+	<test name="WebTest - In Billing Page ">
+		
+		<parameter name="testType" value="Web" />
+		<classes>
+			<class name="com.seleniumtests.tests.CSTEST" />
+		</classes>
+	</test>
+
+
+	
+
+	
+		
+	
+
+</suite> 
