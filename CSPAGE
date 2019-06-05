@@ -11,7 +11,8 @@
     private static final TextFieldElement facebook_url=new TextFieldElement("enter the facebook login",locateByXPath("//div[contains(text(),'facebook.com/')]/..//input[1]"));
     private static final TextFieldElement twitter_url=new TextFieldElement("enter the twitter login",locateByXPath("//div[contains(text(),'twitter.com/')]/..//input[1]"));
     private static final TextFieldElement linkedin_url=new TextFieldElement("enter thelinkedin_url",locateByXPath("//div[contains(text(),'linkedin.com/')]/..//input[1]"));
-    private static final ButtonElement browser=new ButtonElement("enter the browser button",locateByXPath(" //span[@class='filepond--label-action']"));
+    private static final ButtonElement primary_browser=new ButtonElement("enter the browser button",locateByXPath("//label[@id='filepond--drop-label-vob1w6hpb']"));
+    private static final ButtonElement secondary_browser=new ButtonElement("enter the browser button",locateByXPath("//label[@id='filepond--drop-label-x1mix5rx8']"));
     private static final ButtonElement save_changes=new ButtonElement("click on the button",locateByXPath(" //button[@class='ui green button'] "));
     private static final ButtonElement logout=new ButtonElement("click on the logout button",locateByXPath("//a[contains(text(),'Log out')]"));
     private static final ButtonElement Addlocation=new ButtonElement("click on the add locations",locateByXPath("//a[contains(text(),'Add locations')]"));
@@ -39,6 +40,44 @@ public CSPage randomData(final  CSDATA  CSDATA) throws Exception {
 	
 	return this;
   }
+  
+  public CSPage SimulateClick(ButtonElement element) throws Exception {
+	 waitForSeconds(2);
+	    element.simulateClick();
+    return this;
+}
+
+  public CSPage clickEnter() throws Exception {
+	File file = new File("C:\\Users\\muvi\\Desktop\\yy.jpg");
+
+    ClipboardOwner owner = null;
+
+    Robot robot = new Robot();
+    StringSelection str_path = new StringSelection(file.getAbsolutePath());
+    Toolkit.getDefaultToolkit().getSystemClipboard().setContents(str_path, owner);
+
+    robot.setAutoDelay(1000);
+    robot.keyPress(KeyEvent.VK_CONTROL);
+    robot.keyPress(KeyEvent.VK_V);
+    robot.keyRelease(KeyEvent.VK_CONTROL);
+    robot.keyRelease(KeyEvent.VK_K);
+
+    robot.setAutoDelay(1000);
+    robot.keyPress(KeyEvent.VK_ENTER);
+    robot.keyPress(KeyEvent.VK_ENTER);
+    Thread.sleep(3000);
+      return this;
+}
+  public CSPage Company_Profile()throws Exception {
+	
+    Textbox(Company_Website_URL,"https://www.muvi.com/").Wait(5).
+    SimulateClick(primary_browser).clickEnter().Wait(5).SimulateClick(secondary_browser).clickEnter().
+    Wait(5).Textbox(About_the_Company,"test description").Textbox(facebook_url,"https://www.facebook.com/").Textbox(twitter_url,"https://twitter.com/login?lang=en")
+    .Textbox(linkedin_url,"https://in.linkedin.com/");
+	
+	return this;
+	
+}
   
 public CSPage Add_location()throws Exception {
 	
@@ -103,44 +142,34 @@ public CSPage TC_menu_01(final CSDATA CSDATA) throws Exception
 }
 
 
-//Login with complete_profile method
+//Login with company_profile and Add_location method
 
 public CSPage TC_menu_02(final CSDATA CSDATA) throws Exception 
 {
 	
  Click(login_button)
- .Textbox(emailid,"fghf@yopmail.com")
+ .Textbox(emailid,"newusera@yopmail.com")
  .Wait(2)
  .Textbox(password,"12345678")
  .Wait(2)
+ .Click(login_button1)
 .Click(complete_profile)
 .Wait(2)
 .Company_Profile()
 .Wait(5)
 .Click(save_changes)
-.Wait(5);
+.Wait(5)
+.Click(Addlocation)
+.Click(add_office_location) 
+.Add_location()
+.Click(logout);
  
  return  new CSPage(false);
 }
 
 
-//Login with Add_location
 
-public CSPage TC_menu_03(final CSDATA CSDATA) throws Exception 
-{
 
-Click(login_button)
-.Textbox(emailid,"fghf@yopmail.com")
-.Wait(2)
-.Textbox(password,"12345678")
-.Wait(2)
-.Click(Addlocation)
-.Click(add_office_location) 
-.Add_location()
-.Click(logout); 
-    
-return  new CSPage(false);
-    
-}
+
 	
 	
